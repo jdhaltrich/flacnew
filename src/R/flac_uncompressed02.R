@@ -151,9 +151,9 @@ spectrogramfn <- function(x,n){
         )
 }
 
-#if (spectrogramoption == 1) {
-#spectrogramfn(fileflac,filepng)
-#}
+if (spectrogramoption == 1) {
+spectrogramfn(fileflac,filepng)
+}
 
 exiftoolfn <- function(e,k){
         argsexiftool <- c(
@@ -172,7 +172,7 @@ exiftoolfn <- function(e,k){
         )
 }
 
-#exiftoolfn(fileflac,filemd)
+exiftoolfn(fileflac,filemd)
 finishts <- Sys.time()
 timestamps <- c(startts,finishts)
 
