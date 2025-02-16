@@ -110,45 +110,28 @@ formatfn <- function(x01){
 filemd <- paste(targetfilelogdir,"/",formatfn(targetfilename)[1], "md", sep = "", collapse = NULL)
 filetsmd <- paste(targetfilelogdir,"/",formatfn(targetfilename)[1],"ts", "md", sep = "", collapse = NULL)
 filepng <- paste(targetfilespectrogramsdir,"/",formatfn(targetfilename)[1], "png", sep = "", collapse = NULL)
-fileflac <- paste(targetfiledir,"/",formatfn(targetfilename)[1], "flac", sep = "", collapse = NULL)
+fileflac <- paste(targetfiledir,"/",formatfn(targetfilename)[1], "mp3", sep = "", collapse = NULL)
 fileformat <- formatfn(targetfilename)[2]
 
-flacfn <- function(n,x,r){
-            argsvector <- if (r == "flac") {
-                    c("-l",
-                    "0",
-                    "--disable-constant-subframes",
-                    "--disable-fixed-subframes",
-                    "--no-preserve-modtime",
-                    "-V",
-                    "-o",
+ffmpegfn <- function(x,n){
+    argsffmpeg <- c(
+                    "-nostdin",
+                    "-i",
                     x,
+                    "-c:a libmp3lame",
+                    "-b:a 320k",
                     n
                     )
-                } else {
-                    c("-l",
-                    "0",
-                    "--disable-constant-subframes",
-                    "--disable-fixed-subframes",
-                    "--no-preserve-modtime",
-                    "--keep-foreign-metadata",
-                    "-V",
-                    "-o",
-                    x,
-                    n
-                    )
-            }
-
-            exec_wait("/usr/bin/flac",
-            args = argsvector,
-            std_out = TRUE,
-            std_err = FALSE,
-            std_in = NULL,
-            timeout = 0
-            )
+    exec_wait("/usr/bin/ffmpeg",
+        args = argsffmpeg,
+        std_out = FALSE,
+        std_err = FALSE,
+        std_in = NULL,
+        timeout = 0
+    )
 }
 
-flacfn(basefile02,fileflac,fileformat)
+ffmpegfn(basefile02,fileflac)
 
 spectrogramfn <- function(x,n){
         argsffmpeg <- c(
@@ -168,9 +151,9 @@ spectrogramfn <- function(x,n){
         )
 }
 
-if (spectrogramoption == 1) {
-spectrogramfn(fileflac,filepng)
-}
+#if (spectrogramoption == 1) {
+#spectrogramfn(fileflac,filepng)
+#}
 
 exiftoolfn <- function(e,k){
         argsexiftool <- c(
@@ -189,7 +172,7 @@ exiftoolfn <- function(e,k){
         )
 }
 
-exiftoolfn(fileflac,filemd)
+#exiftoolfn(fileflac,filemd)
 finishts <- Sys.time()
 timestamps <- c(startts,finishts)
 
