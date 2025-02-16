@@ -173,6 +173,7 @@ exiftoolfn <- function(e,k){
 }
 
 exiftoolfn(fileflac,filemd)
+
 finishts <- Sys.time()
 timestamps <- c(startts,finishts)
 
