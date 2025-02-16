@@ -1,2 +1,0 @@
-#!/usr/bin/env bash
-R --no-save --no-restore '--args /laynestaley88/jdhaltrich/audio/lab/flac/work /armand_van_helden /armand_van_helden_flacuncmpR 1 /laynestaley88/jdhaltrich/linuxstp/dev/script/flac/v1_2/src/R/v1_2_r2/flac_uncmp2_02.R amhparallelflacR' < flac_uncmp2_01.R

@@ -79,7 +79,7 @@ targetfilesdir <- unique(sub("/[^/]*$", "",targetfiles), incomparables = FALSE)
 
 targetlogdirs <- paste(
             targetfilesdir,
-			rep("/logs",
+			rep("/logsflac",
 			times = length(targetfilesdir)), sep = "",
 			collapse = NULL
 		)
@@ -115,7 +115,7 @@ filecount <- length(targetfiles)
 lapply(1:filecount,
     function(k){
         string <- paste(
-                    "R --no-save CMD BATCH '--args ",
+                    "R --no-save --no-restore CMD BATCH '--args ",
                     paste("'",rootdir,"' ",sep = ""),
                     paste("'",codearguments[2],"' ",sep = ""),
                     paste("'",codearguments[3],"' ",sep = ""),

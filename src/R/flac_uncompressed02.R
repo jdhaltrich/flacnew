@@ -9,15 +9,6 @@ targetdir <- paste(rootdir, codearguments[3], sep = "", collapse = NULL)
 basefileindex <- as.numeric(codearguments[4])
 spectrogramoption <- as.numeric(codearguments[5])
 
-#writefn <- function(x,w){
-#    write(x,
-#        file = paste(x, "/", w, sep = "", collapse = NULL),
-#        ncolumns = 1,
-#        append = FALSE,
-#        sep = ""
-#    )
-#}
-
 logfn <- function(nflag,datavector,target){
         if (nflag == 1) {
             write(datavector,target,ncolumns = 1,append = FALSE, sep = "\n")
@@ -75,7 +66,6 @@ basefiles01 <- c(basefiles_flac,
 		basefiles_aiff
 	)
 
-
 basefile02 <- basefiles01[basefileindex]
 
 rm(
@@ -93,7 +83,7 @@ targetfile <- gsub(basedir, targetdir, basefile02, ignore.case = FALSE,
 	)
 
 targetfiledir <- sub("/[^/]*$", "",targetfile)
-targetfilelogdir <- paste(targetfiledir, "/logs", sep = "", collapse = NULL)
+targetfilelogdir <- paste(targetfiledir, "/logsflac", sep = "", collapse = NULL)
 targetfilespectrogramsdir <- paste(targetfiledir, "/spectrograms", sep = "", collapse = NULL)
 targetfilename <- sub(".*\\/", "", targetfile)
 
@@ -122,12 +112,6 @@ filetsmd <- paste(targetfilelogdir,"/",formatfn(targetfilename)[1],"ts", "md", s
 filepng <- paste(targetfilespectrogramsdir,"/",formatfn(targetfilename)[1], "png", sep = "", collapse = NULL)
 fileflac <- paste(targetfiledir,"/",formatfn(targetfilename)[1], "flac", sep = "", collapse = NULL)
 fileformat <- formatfn(targetfilename)[2]
-
-#baselogfilename <- "basefilepath.md"
-#targetlogfilename <- "targetfilepath.md"
-
-#writefn(logdir,baselogfilename)
-#writefn(logdir,targetlogfilename)
 
 flacfn <- function(n,x,r){
             argsvector <- if (r == "flac") {
